@@ -1,0 +1,71 @@
+<!-- ========== DARK FOOTER ========== -->
+    <div class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-4 gap-12 text-sm">
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase">About</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">About KFC</a></li>
+                        <li><a href="#" class="hover:text-white transition">Find Us KFC</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase">Site Map</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Franchising</a></li>
+                        <li><a href="#" class="hover:text-white transition">Accessibility</a></li>
+                        <li><a href="#" class="hover:text-white transition">Give Me Refund</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4 uppercase">Nutrition</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="hover:text-white transition">Full Nutrition Guide</a></li>
+                        <li><a href="#" class="hover:text-white transition">Allergen Information</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-white font-bold mb-2">© 2017 KFC Corporation</p>
+                    <p class="text-xs text-gray-500">All rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Slider automatique pour le hero
+        let currentSlide = 0;
+        const slides = 4; // Nombre de slides
+        
+        function updateSlideIndicators() {
+            const indicators = document.querySelectorAll('.max-w-7xl.mx-auto.px-8.pb-8 button');
+            indicators.forEach((indicator, index) => {
+                if (index === currentSlide) {
+                    indicator.className = 'w-4 h-4 rounded-full bg-white';
+                } else {
+                    indicator.className = 'w-4 h-4 rounded-full bg-white/40';
+                }
+            });
+        }
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides;
+            updateSlideIndicators();
+        }
+        
+        // Change de slide toutes les 5 secondes
+        setInterval(nextSlide, 5000);
+        
+        // Gestion des clics sur les indicateurs
+        document.querySelectorAll('.max-w-7xl.mx-auto.px-8.pb-8 button').forEach((button, index) => {
+            button.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlideIndicators();
+            });
+        });
+    </script>
+
+</body>
+</html>

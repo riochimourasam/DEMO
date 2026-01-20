@@ -14,6 +14,33 @@
         body {
             font-family: 'Arial', sans-serif;
         }
+        
+        /* Masquer le menu desktop sur mobile */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+        }
+        
+        /* Menu hamburger */
+        .mobile-menu {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+        }
+        
+        .mobile-menu-content {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu-content.open {
+            transform: translateX(0);
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -22,143 +49,140 @@
     <section class="relative bg-red-600 overflow-hidden">
         <div class="absolute inset-0">
             <!-- Large KFC Logo Background -->
-            <div class="absolute top-0 right-0 text-red-700 opacity-20 text-[600px] font-bold leading-none">
+            <div class="absolute top-0 right-0 text-red-700 opacity-20 text-[300px] md:text-[600px] font-bold leading-none">
                 KFC
             </div>
         </div>
         
         <div class="relative z-10">
             <!-- HEADER -->
-            <header class="py-6 px-8">
+            <header class="py-4 md:py-6 px-4 md:px-8">
                 <div class="max-w-7xl mx-auto flex items-center justify-between">
                     <!-- Logo -->
-                    <div class="text-white text-5xl font-bold italic">KFC</div>
+                    <div class="text-white text-3xl md:text-5xl font-bold italic">KFC</div>
                     
-                    <!-- Navigation -->
-                    <nav class="flex gap-8 text-sm text-white font-semibold">
+                    <!-- Navigation Desktop -->
+                    <nav class="desktop-nav hidden md:flex gap-8 text-sm text-white font-semibold">
                         <a href="#" class="hover:text-gray-200 transition">ABOUT US</a>
                         <a href="#" class="hover:text-gray-200 transition">FIND US</a>
                         <a href="#" class="hover:text-gray-200 transition">ALL CAMPAIGNS</a>
                     </nav>
                     
                     <!-- Icons -->
-                    <div class="flex gap-3">
-                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center cursor-pointer">
-                            <svg class="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                    <div class="flex gap-2 md:gap-3">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center cursor-pointer">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-red-600" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                             </svg>
                         </div>
-                        <div class="relative w-12 h-12 bg-white rounded-full flex items-center justify-center cursor-pointer">
-                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="relative w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center cursor-pointer">
+                            <svg class="w-5 h-5 md:w-6 md:h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
                             </svg>
                             <span class="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">0</span>
                         </div>
+                        <!-- Menu hamburger mobile -->
+                        <button class="mobile-menu w-10 h-10 md:hidden bg-white rounded-full flex items-center justify-center" onclick="toggleMenu()">
+                            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </header>
             
             <!-- Hero Content -->
-            <div class="max-w-7xl mx-auto px-8 py-20 flex items-center justify-between">
-                <div class="text-white max-w-xl">
-                    <h1 class="text-7xl font-black mb-6 leading-tight uppercase">BARGAIN<br>BUCKET MENU<br>CAMPAIGN</h1>
-                    <p class="text-lg mb-8 leading-relaxed">Some campaign text goes here, explaining the offer.<br>Sometimes that's all you need to turn an average<br>day into a great one.</p>
-                    <button class="border-3 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-red-600 transition text-lg font-bold uppercase">
+            <div class="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-20 flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="text-white max-w-xl text-center md:text-left">
+                    <h1 class="text-4xl md:text-7xl font-black mb-4 md:mb-6 leading-tight uppercase">BARGAIN<br>BUCKET MENU<br>CAMPAIGN</h1>
+                    <p class="text-sm md:text-lg mb-6 md:mb-8 leading-relaxed">Some campaign text goes here, explaining the offer. Sometimes that's all you need to turn an average day into a great one.</p>
+                    <button class="border-2 md:border-3 border-white text-white px-6 md:px-10 py-3 md:py-4 rounded-full hover:bg-white hover:text-red-600 transition text-sm md:text-lg font-bold uppercase">
                         ORDER NOW
                     </button>
                 </div>
                 
                 <!-- Product Images with Price -->
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=600&q=90" alt="KFC Bucket" class="w-[550px] relative z-10"/>
+                <div class="relative w-full md:w-auto flex justify-center">
+                    <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=600&q=90" alt="KFC Bucket" class="w-64 md:w-[550px] relative z-10"/>
                     
                     <!-- Price Badge -->
-                    <div class="absolute top-20 -right-8 bg-white text-red-600 rounded-full w-36 h-36 flex flex-col items-center justify-center shadow-2xl z-20">
-                        <p class="text-sm font-bold">Only</p>
-                        <p class="text-5xl font-black leading-none">19<sup class="text-2xl">.50</sup></p>
-                        <p class="text-lg font-bold">TL</p>
+                    <div class="absolute top-4 md:top-20 -right-2 md:-right-8 bg-white text-red-600 rounded-full w-24 h-24 md:w-36 md:h-36 flex flex-col items-center justify-center shadow-2xl z-20">
+                        <p class="text-xs md:text-sm font-bold">Only</p>
+                        <p class="text-3xl md:text-5xl font-black leading-none">19<sup class="text-lg md:text-2xl">.50</sup></p>
+                        <p class="text-sm md:text-lg font-bold">TL</p>
                     </div>
-                    
-                    <!-- Arrows -->
-                    <svg class="absolute top-16 left-0 w-32 h-32 text-white" fill="currentColor" viewBox="0 0 100 100">
-                        <path d="M10 50 L40 30 L40 45 L70 45 L70 35 L90 50 L70 65 L70 55 L40 55 L40 70 Z"/>
-                    </svg>
-                    
-                    <svg class="absolute bottom-10 right-20 w-24 h-24 text-white transform rotate-45" fill="currentColor" viewBox="0 0 100 100">
-                        <path d="M10 50 L40 30 L40 45 L70 45 L70 35 L90 50 L70 65 L70 55 L40 55 L40 70 Z"/>
-                    </svg>
                 </div>
             </div>
             
             <!-- Slide Indicators -->
-            <div class="max-w-7xl mx-auto px-8 pb-8 flex gap-3">
-                <button class="w-4 h-4 rounded-full bg-white"></button>
-                <button class="w-4 h-4 rounded-full bg-white/40"></button>
-                <button class="w-4 h-4 rounded-full bg-white/40"></button>
-                <button class="w-4 h-4 rounded-full bg-white/40"></button>
+            <div class="max-w-7xl mx-auto px-4 md:px-8 pb-6 md:pb-8 flex gap-2 md:gap-3 justify-center md:justify-start">
+                <button class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-white"></button>
+                <button class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-white/40"></button>
+                <button class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-white/40"></button>
+                <button class="w-3 h-3 md:w-4 md:h-4 rounded-full bg-white/40"></button>
             </div>
         </div>
     </section>
 
     <!-- ========== MENU CATEGORIES ========== -->
-    <section class="bg-white py-8 w-full">
-        <div class="w-full px-6">
-            <div class="flex items-center justify-between max-w-7xl mx-auto">
-                <button class="text-gray-700 hover:text-gray-900">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+    <section class="bg-white py-6 md:py-8 w-full overflow-x-auto">
+        <div class="w-full px-4 md:px-6">
+            <div class="flex items-center justify-start md:justify-between max-w-7xl mx-auto gap-4">
+                <button class="hidden md:block text-gray-700 hover:text-gray-900 flex-shrink-0">
+                    <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
                     </svg>
                 </button>
                 
-                <div class="flex gap-12 items-end">
-                    <div class="flex flex-col items-center cursor-pointer group">
-                        <img src="https://cdn-icons-png.flaticon.com/128/1046/1046784.png" class="w-16 h-16 mb-2" alt="KDS Menus"/>
-                        <p class="text-xs font-bold text-gray-700 text-center whitespace-nowrap">KDS MENUS</p>
+                <div class="flex gap-6 md:gap-12 items-end overflow-x-auto pb-2">
+                    <div class="flex flex-col items-center cursor-pointer group flex-shrink-0">
+                        <img src="https://cdn-icons-png.flaticon.com/128/1046/1046784.png" class="w-12 h-12 md:w-16 md:h-16 mb-2" alt="KDS Menus"/>
+                        <p class="text-[10px] md:text-xs font-bold text-gray-700 text-center whitespace-nowrap">KDS MENUS</p>
                     </div>
                     
-                    <div class="flex flex-col items-center cursor-pointer group">
-                        <img src="https://cdn-icons-png.flaticon.com/128/3724/3724790.png" class="w-16 h-16 mb-2" alt="Snacks"/>
-                        <p class="text-xs font-bold text-gray-700 text-center whitespace-nowrap">SNACKS PRODUCTS</p>
+                    <div class="flex flex-col items-center cursor-pointer group flex-shrink-0">
+                        <img src="https://cdn-icons-png.flaticon.com/128/3724/3724790.png" class="w-12 h-12 md:w-16 md:h-16 mb-2" alt="Snacks"/>
+                        <p class="text-[10px] md:text-xs font-bold text-gray-700 text-center whitespace-nowrap">SNACKS</p>
                     </div>
                     
-                    <div class="flex flex-col items-center cursor-pointer border-b-4 border-red-600 pb-1">
-                        <img src="https://cdn-icons-png.flaticon.com/128/2553/2553691.png" class="w-16 h-16 mb-2" alt="Box Meals"/>
-                        <p class="text-xs font-bold text-red-600 text-center whitespace-nowrap">BOX MEALS</p>
+                    <div class="flex flex-col items-center cursor-pointer border-b-4 border-red-600 pb-1 flex-shrink-0">
+                        <img src="https://cdn-icons-png.flaticon.com/128/2553/2553691.png" class="w-12 h-12 md:w-16 md:h-16 mb-2" alt="Box Meals"/>
+                        <p class="text-[10px] md:text-xs font-bold text-red-600 text-center whitespace-nowrap">BOX MEALS</p>
                     </div>
                     
-                    <div class="flex flex-col items-center cursor-pointer group">
-                        <img src="https://cdn-icons-png.flaticon.com/128/1046/1046786.png" class="w-16 h-16 mb-2" alt="Meals"/>
-                        <p class="text-xs font-bold text-gray-700 text-center whitespace-nowrap">MEALS</p>
+                    <div class="flex flex-col items-center cursor-pointer group flex-shrink-0">
+                        <img src="https://cdn-icons-png.flaticon.com/128/1046/1046786.png" class="w-12 h-12 md:w-16 md:h-16 mb-2" alt="Meals"/>
+                        <p class="text-[10px] md:text-xs font-bold text-gray-700 text-center whitespace-nowrap">MEALS</p>
                     </div>
                     
-                    <div class="flex flex-col items-center cursor-pointer group">
-                        <img src="https://cdn-icons-png.flaticon.com/128/3151/3151490.png" class="w-16 h-16 mb-2" alt="Buckets"/>
-                        <p class="text-xs font-bold text-gray-700 text-center whitespace-nowrap">BUCKETS</p>
+                    <div class="flex flex-col items-center cursor-pointer group flex-shrink-0">
+                        <img src="https://cdn-icons-png.flaticon.com/128/3151/3151490.png" class="w-12 h-12 md:w-16 md:h-16 mb-2" alt="Buckets"/>
+                        <p class="text-[10px] md:text-xs font-bold text-gray-700 text-center whitespace-nowrap">BUCKETS</p>
                     </div>
                     
-                    <div class="flex flex-col items-center cursor-pointer group">
-                        <img src="https://cdn-icons-png.flaticon.com/128/1046/1046751.png" class="w-16 h-16 mb-2" alt="Chicken"/>
-                        <p class="text-xs font-bold text-gray-700 text-center whitespace-nowrap">CHICKEN</p>
+                    <div class="flex flex-col items-center cursor-pointer group flex-shrink-0">
+                        <img src="https://cdn-icons-png.flaticon.com/128/1046/1046751.png" class="w-12 h-12 md:w-16 md:h-16 mb-2" alt="Chicken"/>
+                        <p class="text-[10px] md:text-xs font-bold text-gray-700 text-center whitespace-nowrap">CHICKEN</p>
                     </div>
                     
-                    <div class="flex flex-col items-center cursor-pointer group">
-                        <img src="https://cdn-icons-png.flaticon.com/128/2276/2276931.png" class="w-16 h-16 mb-2" alt="Sauces"/>
-                        <p class="text-xs font-bold text-gray-700 text-center whitespace-nowrap">SAUCES</p>
+                    <div class="flex flex-col items-center cursor-pointer group flex-shrink-0">
+                        <img src="https://cdn-icons-png.flaticon.com/128/2276/2276931.png" class="w-12 h-12 md:w-16 md:h-16 mb-2" alt="Sauces"/>
+                        <p class="text-[10px] md:text-xs font-bold text-gray-700 text-center whitespace-nowrap">SAUCES</p>
                     </div>
                     
-                    <div class="flex flex-col items-center cursor-pointer group">
-                        <img src="https://cdn-icons-png.flaticon.com/128/924/924514.png" class="w-16 h-16 mb-2" alt="Drinks"/>
-                        <p class="text-xs font-bold text-gray-700 text-center whitespace-nowrap">DRINKS</p>
+                    <div class="flex flex-col items-center cursor-pointer group flex-shrink-0">
+                        <img src="https://cdn-icons-png.flaticon.com/128/924/924514.png" class="w-12 h-12 md:w-16 md:h-16 mb-2" alt="Drinks"/>
+                        <p class="text-[10px] md:text-xs font-bold text-gray-700 text-center whitespace-nowrap">DRINKS</p>
                     </div>
                     
-                    <div class="flex flex-col items-center cursor-pointer group">
-                        <img src="https://cdn-icons-png.flaticon.com/128/3075/3075908.png" class="w-16 h-16 mb-2" alt="Sides"/>
-                        <p class="text-xs font-bold text-gray-700 text-center whitespace-nowrap">SIDES</p>
+                    <div class="flex flex-col items-center cursor-pointer group flex-shrink-0">
+                        <img src="https://cdn-icons-png.flaticon.com/128/3075/3075908.png" class="w-12 h-12 md:w-16 md:h-16 mb-2" alt="Sides"/>
+                        <p class="text-[10px] md:text-xs font-bold text-gray-700 text-center whitespace-nowrap">SIDES</p>
                     </div>
                 </div>
                 
-                <button class="text-gray-700 hover:text-gray-900">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                <button class="hidden md:block text-gray-700 hover:text-gray-900 flex-shrink-0">
+                    <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
                     </svg>
                 </button>
@@ -167,18 +191,18 @@
     </section>
 
     <!-- ========== PROMOTIONAL CARDS ROW 1 ========== -->
-    <section class="max-w-6xl mx-auto px-6 py-12">
-        <div class="grid grid-cols-3 gap-6">
+    <section class="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             <!-- ANY DAY OFFERS -->
-            <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl shadow-lg p-8 relative overflow-hidden h-64">
+            <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl shadow-lg p-6 md:p-8 relative overflow-hidden h-56 md:h-64">
                 <div class="relative z-10">
-                    <h3 class="text-2xl font-black mb-1 text-gray-800">ANY DAY<br>OFFERS</h3>
+                    <h3 class="text-xl md:text-2xl font-black mb-1 text-gray-800">ANY DAY<br>OFFERS</h3>
                     <p class="text-xs text-gray-600 mb-3 uppercase font-semibold">New Friendship<br>Burger Deal</p>
-                    <p class="text-4xl font-black text-red-600">12.90 <span class="text-2xl">TL</span></p>
+                    <p class="text-3xl md:text-4xl font-black text-red-600">12.90 <span class="text-xl md:text-2xl">TL</span></p>
                 </div>
-                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&q=90" alt="Burger" class="absolute -right-4 -bottom-8 w-56 h-56 object-contain"/>
-                <span class="absolute top-6 right-6 bg-red-600 text-white px-4 py-1 rounded-full text-xs font-black uppercase">NEW</span>
-                <div class="absolute bottom-4 left-8 flex gap-2">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&q=90" alt="Burger" class="absolute -right-4 -bottom-8 w-48 md:w-56 h-48 md:h-56 object-contain"/>
+                <span class="absolute top-4 md:top-6 right-4 md:right-6 bg-red-600 text-white px-3 md:px-4 py-1 rounded-full text-xs font-black uppercase">NEW</span>
+                <div class="absolute bottom-4 left-6 md:left-8 flex gap-2">
                     <div class="w-2 h-2 rounded-full bg-yellow-400"></div>
                     <div class="w-2 h-2 rounded-full bg-gray-300"></div>
                     <div class="w-2 h-2 rounded-full bg-gray-300"></div>
@@ -186,14 +210,14 @@
             </div>
 
             <!-- OTHER FLAVORS -->
-            <div class="bg-red-600 rounded-2xl shadow-lg p-8 text-white relative overflow-hidden h-64">
+            <div class="bg-red-600 rounded-2xl shadow-lg p-6 md:p-8 text-white relative overflow-hidden h-56 md:h-64">
                 <div class="relative z-10">
-                    <h3 class="text-2xl font-black mb-1">OTHER<br>FLAVORS</h3>
+                    <h3 class="text-xl md:text-2xl font-black mb-1">OTHER<br>FLAVORS</h3>
                     <p class="text-sm mb-3">Dark Bucket</p>
-                    <p class="text-4xl font-black">3.90 <span class="text-2xl">TL</span></p>
+                    <p class="text-3xl md:text-4xl font-black">3.90 <span class="text-xl md:text-2xl">TL</span></p>
                 </div>
-                <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=300&q=90" alt="Bucket" class="absolute -right-4 -bottom-4 w-48 h-48 object-contain"/>
-                <div class="absolute bottom-4 left-8 flex gap-2">
+                <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb92?w=300&q=90" alt="Bucket" class="absolute -right-4 -bottom-4 w-40 md:w-48 h-40 md:h-48 object-contain"/>
+                <div class="absolute bottom-4 left-6 md:left-8 flex gap-2">
                     <div class="w-2 h-2 rounded-full bg-white"></div>
                     <div class="w-2 h-2 rounded-full bg-white/40"></div>
                     <div class="w-2 h-2 rounded-full bg-white/40"></div>
@@ -201,18 +225,18 @@
             </div>
 
             <!-- FIND A KFC STORE -->
-            <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl shadow-lg p-8 relative overflow-hidden h-64 flex flex-col justify-between">
+            <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl shadow-lg p-6 md:p-8 relative overflow-hidden h-56 md:h-64 flex flex-col justify-between">
                 <div class="relative z-10">
-                    <h3 class="text-2xl font-black text-gray-800 leading-tight">FIND A KFC<br>STORE<br>NEAR YOU</h3>
+                    <h3 class="text-xl md:text-2xl font-black text-gray-800 leading-tight">FIND A KFC<br>STORE<br>NEAR YOU</h3>
                 </div>
                 <div class="flex justify-end">
-                    <div class="w-28 h-28 bg-red-600 rounded-full flex items-center justify-center">
-                        <svg class="w-14 h-14 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <div class="w-20 h-20 md:w-28 md:h-28 bg-red-600 rounded-full flex items-center justify-center">
+                        <svg class="w-10 h-10 md:w-14 md:h-14 text-white" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                         </svg>
                     </div>
                 </div>
-                <div class="absolute bottom-4 left-8 flex gap-2">
+                <div class="absolute bottom-4 left-6 md:left-8 flex gap-2">
                     <div class="w-2 h-2 rounded-full bg-blue-400"></div>
                     <div class="w-2 h-2 rounded-full bg-gray-300"></div>
                     <div class="w-2 h-2 rounded-full bg-gray-300"></div>
@@ -222,31 +246,31 @@
     </section>
 
     <!-- ========== PROMOTIONAL CARDS ROW 2 ========== -->
-    <section class="max-w-6xl mx-auto px-6 pb-16">
-        <div class="grid grid-cols-2 gap-6">
+    <section class="max-w-6xl mx-auto px-4 md:px-6 pb-12 md:pb-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <!-- CRISPY AND FRESH CHICKEN MASTER CHEF -->
-            <div class="bg-white rounded-2xl shadow-lg p-8 relative overflow-hidden h-72">
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 relative overflow-hidden h-64 md:h-72">
                 <div class="relative z-10 max-w-xs">
-                    <h3 class="text-3xl font-black mb-6 text-gray-800 leading-tight">CRISPY AND FRESH CHICKEN MASTER CHEF</h3>
-                    <button class="bg-red-600 text-white px-8 py-3 rounded-full hover:bg-red-700 transition font-bold text-sm uppercase">
-                        9.100 REAL CHICKEN
+                    <h3 class="text-2xl md:text-3xl font-black mb-4 md:mb-6 text-gray-800 leading-tight">CRISPY AND FRESH CHICKEN MASTER CHEF</h3>
+                    <button class="bg-red-600 text-white px-6 md:px-8 py-2 md:py-3 rounded-full hover:bg-red-700 transition font-bold text-xs md:text-sm uppercase">
+                        100% REAL CHICKEN
                     </button>
                 </div>
-                <img src="https://images.unsplash.com/photo-1598514982901-ae62764ae75e?w=500&q=90" alt="Kitchen" class="absolute right-0 bottom-0 w-80 h-64 object-cover rounded-2xl shadow-lg"/>
+                <img src="https://images.unsplash.com/photo-1598514982901-ae62764ae75e?w=500&q=90" alt="Kitchen" class="absolute right-0 bottom-0 w-48 md:w-80 h-48 md:h-64 object-cover rounded-2xl shadow-lg"/>
             </div>
 
             <!-- DO YOU WANT TO BE A HOPE? -->
-            <div class="bg-white rounded-2xl shadow-lg p-8 relative overflow-hidden h-72">
+            <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 relative overflow-hidden h-64 md:h-72">
                 <div class="relative z-10 max-w-xs">
-                    <h3 class="text-3xl font-black mb-6 text-gray-800 leading-tight">DO YOU WANT TO BE A HOPE?</h3>
-                    <button class="bg-red-600 text-white px-8 py-3 rounded-full hover:bg-red-700 transition font-bold text-sm uppercase">
+                    <h3 class="text-2xl md:text-3xl font-black mb-4 md:mb-6 text-gray-800 leading-tight">DO YOU WANT TO BE A HOPE?</h3>
+                    <button class="bg-red-600 text-white px-6 md:px-8 py-2 md:py-3 rounded-full hover:bg-red-700 transition font-bold text-xs md:text-sm uppercase">
                         SEE MORE
                     </button>
                 </div>
-                <div class="absolute right-12 bottom-12 w-36 h-36 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center shadow-lg">
+                <div class="absolute right-8 md:right-12 bottom-8 md:bottom-12 w-28 h-28 md:w-36 md:h-36 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center shadow-lg">
                     <div class="text-center text-white">
-                        <p class="text-5xl mb-2">♥</p>
-                        <p class="text-sm font-bold">Hope</p>
+                        <p class="text-4xl md:text-5xl mb-2">♥</p>
+                        <p class="text-xs md:text-sm font-bold">Hope</p>
                     </div>
                 </div>
             </div>
@@ -254,30 +278,30 @@
     </section>
 
     <!-- ========== MOBILE APP SECTION ========== -->
-    <section class="bg-gradient-to-r from-yellow-400 to-orange-400 py-20">
-        <div class="max-w-6xl mx-auto px-6 flex items-center gap-16">
-            <div class="w-1/3">
-                <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&q=90" alt="Mobile App" class="w-full drop-shadow-2xl"/>
+    <section class="bg-gradient-to-r from-yellow-400 to-orange-400 py-12 md:py-20">
+        <div class="max-w-6xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center gap-8 md:gap-16">
+            <div class="w-full md:w-1/3">
+                <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=500&q=90" alt="Mobile App" class="w-48 md:w-full mx-auto drop-shadow-2xl"/>
             </div>
-            <div class="w-2/3 text-white">
-                <h2 class="text-6xl font-black mb-8 leading-tight">Now With Your Favorite KFC Mobile Application In Your Pocket</h2>
-                <div class="flex gap-4">
-                    <button class="bg-black text-white px-8 py-4 rounded-xl flex items-center gap-3 hover:bg-gray-900 transition">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <div class="w-full md:w-2/3 text-white text-center md:text-left">
+                <h2 class="text-3xl md:text-6xl font-black mb-6 md:mb-8 leading-tight">Now With Your Favorite KFC Mobile Application In Your Pocket</h2>
+                <div class="flex flex-col md:flex-row gap-3 md:gap-4 justify-center md:justify-start">
+                    <button class="bg-black text-white px-6 md:px-8 py-3 md:py-4 rounded-xl flex items-center gap-3 hover:bg-gray-900 transition justify-center">
+                        <svg class="w-6 h-6 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                         </svg>
                         <div class="text-left">
                             <p class="text-xs">Download on the</p>
-                            <p class="text-lg font-bold">App Store</p>
+                            <p class="text-base md:text-lg font-bold">App Store</p>
                         </div>
                     </button>
-                    <button class="bg-black text-white px-8 py-4 rounded-xl flex items-center gap-3 hover:bg-gray-900 transition">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                    <button class="bg-black text-white px-6 md:px-8 py-3 md:py-4 rounded-xl flex items-center gap-3 hover:bg-gray-900 transition justify-center">
+                        <svg class="w-6 h-6 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
                         </svg>
                         <div class="text-left">
                             <p class="text-xs">Get it on</p>
-                            <p class="text-lg font-bold">Google Play</p>
+                            <p class="text-base md:text-lg font-bold">Google Play</p>
                         </div>
                     </button>
                 </div>
@@ -286,146 +310,165 @@
     </section>
 
     <!-- ========== SOCIAL POSTS & VIDEO ========== -->
-    <section class="max-w-6xl mx-auto px-6 py-16">
-        <div class="grid grid-cols-2 gap-8">
+    <section class="max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             <!-- Social Media Posts -->
-            <div class="space-y-6">
+            <div class="space-y-4 md:space-y-6">
                 <!-- Post cards here -->
                 <div class="bg-white rounded-lg shadow p-4 flex gap-4">
                     <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
                             F
                         </div>
                     </div>
                     <div>
-                        <h4 class="font-bold text-gray-800">PromoCider</h4>
-                        <p class="text-sm text-gray-600">@handle Lorem ipsum dolor sit amet, consectetur adipiscing ligula.</p>
+                        <h4 class="font-bold text-sm md:text-base text-gray-800">PromoCider</h4>
+                        <p class="text-xs md:text-sm text-gray-600">@handle Lorem ipsum dolor sit amet, consectetur adipiscing ligula.</p>
                     </div>
                 </div>
                 
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-white rounded-lg shadow p-4">
-                        <div class="flex gap-3 mb-3">
-                            <div class="w-10 h-10 bg-pink-500 rounded-full"></div>
+                    <div class="bg-white rounded-lg shadow p-3 md:p-4">
+                        <div class="flex gap-2 md:gap-3 mb-2 md:mb-3">
+                            <div class="w-8 h-8 md:w-10 md:h-10 bg-pink-500 rounded-full"></div>
                             <div>
-                                <h4 class="font-bold text-sm">Ayhankok</h4>
+                                <h4 class="font-bold text-xs md:text-sm">Ayhankok</h4>
                             </div>
                         </div>
                         <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=200&q=90" class="w-full rounded"/>
                     </div>
                     
-                    <div class="bg-white rounded-lg shadow p-4">
-                        <div class="flex gap-3 mb-3">
-                            <div class="w-10 h-10 bg-blue-400 rounded-full"></div>
+                    <div class="bg-white rounded-lg shadow p-3 md:p-4">
+                        <div class="flex gap-2 md:gap-3 mb-2 md:mb-3">
+                            <div class="w-8 h-8 md:w-10 md:h-10 bg-blue-400 rounded-full"></div>
                             <div>
-                                <h4 class="font-bold text-sm">celim_ozbek</h4>
+                                <h4 class="font-bold text-xs md:text-sm">celim_ozbek</h4>
                             </div>
                         </div>
-                        <p class="text-xs text-gray-600">@Kfc|ogo Lorem ipsum dolor sit amet...</p>
+                        <p class="text-xs text-gray-600">@Kfc Lorem ipsum dolor sit amet...</p>
                     </div>
                 </div>
             </div>
             
             <!-- Video Section -->
-            <div class="bg-gray-900 rounded-2xl overflow-hidden relative h-96">
+            <div class="bg-gray-900 rounded-2xl overflow-hidden relative h-64 md:h-96">
                 <img src="https://images.unsplash.com/photo-1513185158878-8d8c2a2a3da3?w=700&q=90" class="w-full h-full object-cover opacity-70"/>
-                <div class="absolute inset-0 flex flex-col items-center justify-center">
-                    <button class="w-20 h-20 bg-white rounded-full flex items-center justify-center mb-4 hover:scale-110 transition">
-                        <svg class="w-10 h-10 text-gray-900 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <div class="absolute inset-0 flex flex-col items-center justify-center px-4">
+                    <button class="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center mb-4 hover:scale-110 transition">
+                        <svg class="w-8 h-8 md:w-10 md:h-10 text-gray-900 ml-1" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M8 5v14l11-7z"/>
                         </svg>
                     </button>
-                    <h3 class="text-white text-3xl font-bold text-center">Get the Zinger today,<br>before it goes to space.</h3>
+                    <h3 class="text-white text-xl md:text-3xl font-bold text-center">Get the Zinger today,<br>before it goes to space.</h3>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ========== RED FOOTER ========== -->
-    <footer class="bg-red-600 text-white py-8">
-        <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
-            <div class="text-5xl font-black italic">KFC</div>
+    <footer class="bg-red-600 text-white py-6 md:py-8">
+        <div class="max-w-6xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0">
+            <div class="text-4xl md:text-5xl font-black italic">KFC</div>
             
-            <div class="flex items-center gap-12">
-                <div class="flex items-center gap-3">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <div class="flex flex-col md:flex-row items-center gap-4 md:gap-12">
+                <div class="flex items-center gap-2 md:gap-3">
+                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                     </svg>
-                    <span class="font-bold">444 3 555</span>
+                    <span class="font-bold text-sm md:text-base">444 3 555</span>
                 </div>
-                <div class="flex items-center gap-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-center gap-2 md:gap-3">
+                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                     </svg>
-                    <span class="font-bold">08121 705 00 00</span>
+                    <span class="font-bold text-sm md:text-base">08121 705 00 00</span>
                 </div>
             </div>
             
             <div class="flex gap-3">
-                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition">
-                    <span class="text-red-600 font-bold text-xl">f</span>
+                <div class="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition">
+                    <span class="text-red-600 font-bold text-lg md:text-xl">f</span>
                 </div>
-                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition">
-                    <span class="text-red-600 font-bold text-xl">t</span>
+                <div class="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition">
+                    <span class="text-red-600 font-bold text-lg md:text-xl">t</span>
                 </div>
-                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition">
-                    <span class="text-red-600 font-bold text-xl">y</span>
+                <div class="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition">
+                    <span class="text-red-600 font-bold text-lg md:text-xl">y</span>
                 </div>
-                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition">
-                    <span class="text-red-600 font-bold text-xl">i</span>
+                <div class="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition">
+                    <span class="text-red-600 font-bold text-lg md:text-xl">i</span>
                 </div>
             </div>
         </div>
     </footer>
 
    <!-- ========== DARK FOOTER ========== -->
-    <div class="bg-gray-900 text-gray-400 py-12">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid grid-cols-4 gap-12 text-sm">
+    <div class="bg-gray-900 text-gray-400 py-8 md:py-12">
+        <div class="max-w-6xl mx-auto px-4 md:px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 text-sm">
                 <div>
-                    <h4 class="text-white font-bold mb-4 uppercase">About</h4>
-                    <ul class="space-y-2">
+                    <h4 class="text-white font-bold mb-3 md:mb-4 uppercase text-xs md:text-sm">About</h4>
+                    <ul class="space-y-2 text-xs md:text-sm">
                         <li><a href="#" class="hover:text-white transition">Contact Us</a></li>
                         <li><a href="#" class="hover:text-white transition">About KFC</a></li>
                         <li><a href="#" class="hover:text-white transition">Find Us KFC</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-white font-bold mb-4 uppercase">Site Map</h4>
-                    <ul class="space-y-2">
+                    <h4 class="text-white font-bold mb-3 md:mb-4 uppercase text-xs md:text-sm">Site Map</h4>
+                    <ul class="space-y-2 text-xs md:text-sm">
                         <li><a href="#" class="hover:text-white transition">Franchising</a></li>
                         <li><a href="#" class="hover:text-white transition">Accessibility</a></li>
                         <li><a href="#" class="hover:text-white transition">Give Me Refund</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-white font-bold mb-4 uppercase">Nutrition</h4>
-                    <ul class="space-y-2">
+                    <h4 class="text-white font-bold mb-3 md:mb-4 uppercase text-xs md:text-sm">Nutrition</h4>
+                    <ul class="space-y-2 text-xs md:text-sm">
                         <li><a href="#" class="hover:text-white transition">Home</a></li>
                         <li><a href="#" class="hover:text-white transition">Full Nutrition Guide</a></li>
                         <li><a href="#" class="hover:text-white transition">Allergen Information</a></li>
                     </ul>
                 </div>
                 <div>
-                    <p class="text-white font-bold mb-2">© 2017 KFC Corporation</p>
+                    <p class="text-white font-bold mb-2 text-xs md:text-sm">© 2017 KFC Corporation</p>
                     <p class="text-xs text-gray-500">All rights reserved</p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Menu mobile slide -->
+    <div id="mobileMenu" class="mobile-menu-content fixed top-0 right-0 w-64 h-full bg-white shadow-2xl z-50 p-6">
+        <button onclick="toggleMenu()" class="absolute top-4 right-4 text-gray-600">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+        </button>
+        <nav class="mt-12 space-y-6">
+            <a href="#" class="block text-gray-800 font-semibold hover:text-red-600 transition">ABOUT US</a>
+            <a href="#" class="block text-gray-800 font-semibold hover:text-red-600 transition">FIND US</a>
+            <a href="#" class="block text-gray-800 font-semibold hover:text-red-600 transition">ALL CAMPAIGNS</a>
+        </nav>
+    </div>
+
     <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+        }
+
         // Slider automatique pour le hero
         let currentSlide = 0;
-        const slides = 4; // Nombre de slides
+        const slides = 4;
         
         function updateSlideIndicators() {
-            const indicators = document.querySelectorAll('.max-w-7xl.mx-auto.px-8.pb-8 button');
+            const indicators = document.querySelectorAll('.max-w-7xl.mx-auto.px-4 button, .max-w-7xl.mx-auto.md\\:px-8 button');
             indicators.forEach((indicator, index) => {
                 if (index === currentSlide) {
-                    indicator.className = 'w-4 h-4 rounded-full bg-white';
+                    indicator.className = 'w-3 h-3 md:w-4 md:h-4 rounded-full bg-white';
                 } else {
-                    indicator.className = 'w-4 h-4 rounded-full bg-white/40';
+                    indicator.className = 'w-3 h-3 md:w-4 md:h-4 rounded-full bg-white/40';
                 }
             });
         }
@@ -435,11 +478,9 @@
             updateSlideIndicators();
         }
         
-        // Change de slide toutes les 5 secondes
         setInterval(nextSlide, 5000);
         
-        // Gestion des clics sur les indicateurs
-        document.querySelectorAll('.max-w-7xl.mx-auto.px-8.pb-8 button').forEach((button, index) => {
+        document.querySelectorAll('.max-w-7xl.mx-auto button').forEach((button, index) => {
             button.addEventListener('click', () => {
                 currentSlide = index;
                 updateSlideIndicators();
